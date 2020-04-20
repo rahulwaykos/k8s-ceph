@@ -1,3 +1,4 @@
 ceph osd pool create kubernetes 100
 
-ceph auth get-or-create client.kubernetes mon 'profile rbd' osd 'profile rbd pool=kubernetes' mgr 'profile rbd pool=kubernetes'
+
+ceph auth get-or-create client.kubernetes mon 'allow r' osd 'allow rw pool=kubernetes' mgr 'allow rw pool=kubernetes'
