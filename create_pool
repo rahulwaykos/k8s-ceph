@@ -2,3 +2,6 @@ ceph osd pool create kubernetes 100
 
 
 ceph auth get-or-create client.kubernetes mon 'allow r' osd 'allow rw pool=kubernetes' mgr 'allow rw pool=kubernetes'
+
+
+rbd create --size 2048 kubernetes/myimg
