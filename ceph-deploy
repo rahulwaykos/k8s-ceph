@@ -1,0 +1,24 @@
+wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
+
+echo deb https://download.ceph.com/debian-luminous/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
+
+apt update
+
+apt install ceph-deploy -y
+
+apt install ntp -y
+
+apt install openssh-server -y
+
+ceph-deploy new master
+
+ceph-deploy install master
+
+ceph-deploy mon create-initial
+
+ceph-deploy admin master 
+
+#ceph-deploy osd create --data /dev/vdb1 node01
+ceph-deploy osd create --data /dev/vg/lv1 master
+ceph-deploy osd create --data /dev/vg/lv2 master
+ceph-deploy osd create --data /dev/vg/lv3 master
