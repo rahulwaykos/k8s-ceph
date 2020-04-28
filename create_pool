@@ -2,7 +2,7 @@ ceph osd pool create kubernetes 100
 
 #Katacoda k8s playground__ only two nodes___osd on one node___cant replicate default is set to 3
 
-ceph osd pool set kube size 1 
+ceph osd pool set kubernetes size 1 
 
 ceph-deploy mgr create master
 
