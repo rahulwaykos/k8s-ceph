@@ -1,7 +1,12 @@
 ceph osd pool create kubernetes 100
 
+#Katacoda k8s playground__ only two nodes___osd on one node___cant replicate default is set to 3
 
-ceph auth get-or-create client.kubernetes mon 'allow r' osd 'allow rw pool=kubernetes' mgr 'allow rw pool=kubernetes'
+ceph osd pool set kube size 1 
+
+ceph-deploy mgr create master
+
+ceph auth get-or-create client.kubernetes mon 'allow r' osd 'allow rw' mgr 'allow rw'
 
 
 rbd create --size 2048 kubernetes/myimg
