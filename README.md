@@ -26,8 +26,11 @@ $ ceph osd pool create kubernetes 100
 $ ceph osd lspools
 ```
 ![ceph_health](images/ceph_health.png)
+
 Now we need image to create in kubernetes pool we just created. We are naming image "kube". And see the information of image we created.
+
 ![image](images/image.png)
+
 For kubernetes to access the pool and images we created here on ceph cluster, needs some permission. So we provide it by copying ceph.conf and admin keyring.  (Although it not advised to copy the admin keyring. For better practice keyring with some permission for desired pool is need share).
 ```
 $scp /etc/ceph/ceph.conf root@master:~
