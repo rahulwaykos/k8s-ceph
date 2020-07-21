@@ -2,7 +2,7 @@
 
 This blog is about the integration of ceph with kubernetes. Kubernetes needs persistent storage for application to to maintain the data even after pod fails or deleted. This storage may be storage devices attached to cluster shared by NFS, storage solutions provided by cloud providers. We are considering Ceph here. Before dive into actual process for integration, lets see some basic like what ceph, kubernetes is.
 
-![ceph+k8s](images/ceph-k8s.png)
+![ceph+k8s](images/ceph+k8s.png)
 
 ## What is kubernetes?
 Kubernetes is an open source orchestration tool developed by Google for managing microservices or containerized applications across a distributed cluster of nodes. Kubernetes provides highly resilient infrastructure with zero downtime deployment capabilities, automatic rollback, scaling, and self-healing of containers (which consists of auto-placement, auto-restart, auto-replication , and scaling of containers on the basis of CPU usage).
