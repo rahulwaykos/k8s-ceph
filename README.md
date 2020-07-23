@@ -50,4 +50,5 @@ Note: If the rbdmap enabling fails, try removing rbdmap file from /etc/ceph dire
 
 ![rbdmap](images/rbdmap.png)
 
-
+### Connecting Ceph and kubernetes
+Kubernetes to use ceph storage as backend, kubernetes needs to talk with ceph(not in general) via external storage plugin as this provision is not include in official kube-control-manager image. So we need either to customize the kube-control-manager image or use plugin- rbd-provisioner. In this blog, we are using external plugin. Lets create rbd-provisioner in kube-system namespace with RBAC
