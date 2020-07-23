@@ -15,7 +15,7 @@ Ceph is opensource software defined storage platform. Ceph provides reliable and
 
 ## Pre-requisites
 - Kubernetes cluster
-- Ceph cluster
+- *[Ceph cluster][https://gist.github.com/rahulwaykos/f6bb69dbcf74de8f270675c68e1c52d7]*
 
 ## How to do it?
 ### On Ceph admin
