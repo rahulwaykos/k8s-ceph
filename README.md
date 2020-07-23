@@ -151,7 +151,7 @@ Run following command
 ```
 $ kubectl create -f rbd-provisioner.yml
 ```
-This will create service account RBAC, Role biding etc. Check  if rbd-provisioner pod in running after few minutes by running following command:
+This will create service account RBAC, Role biding etc. Check  if rbd-provisioner pod is running after few minutes by following command:
 ```
 $ kubectl get pods -l app=rbd-provisioner -n kube-system
 ```
