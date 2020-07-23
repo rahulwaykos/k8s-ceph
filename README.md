@@ -33,8 +33,8 @@ Now we need image to create in kubernetes pool we just created. We are naming im
 
 For kubernetes to access the pool and images we created here on ceph cluster, needs some permission. So we provide it by copying ceph.conf and admin keyring.  (Although it not advised to copy the admin keyring. For better practice keyring with some permission for desired pool is need share).
 ```
-$scp /etc/ceph/ceph.conf root@master:~
-$scp /etc/ceph/ceph.client.admin.keyring root@master:~
+$ scp /etc/ceph/ceph.conf root@master:~
+$ scp /etc/ceph/ceph.client.admin.keyring root@master:~
 ```
 ## On kubernetes master
 To make kubernetes master as ceph client we need to follow some steps:
@@ -56,9 +56,8 @@ Kubernetes to use ceph storage as backend, kubernetes needs to talk with ceph(no
 $ docker pull quay.io/external_storage/rbd-provisioner:latest
 $ docker history quay.io/external_storage/rbd-provisioner:latest | grep CEPH_VERSION
 ```
-Now create deployment by running following script. This will create service account RBAC, Role biding etc.
+Now create deployment, save following in rbd-provisioner.yml. 
 ```
-cat <<EOF | kubectl create -n kube-system -f -
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -147,19 +146,22 @@ spec:
         - name: PROVISIONER_NAME
           value: ceph.com/rbd
       serviceAccount: rbd-provisioner
-EOF
 ```
-check  if rbd-provisioner pod in running after few minutes by running following command:
+Run following command
 ```
-kubectl get pods -l app=rbd-provisioner -n kube-system
+$ kubectl create -f rbd-provisioner.yml
+```
+This will create service account RBAC, Role biding etc. Check  if rbd-provisioner pod in running after few minutes by running following command:
+```
+$ kubectl get pods -l app=rbd-provisioner -n kube-system
 ```
 RBD volume provisioner needs admin key from Ceph to provision storage. To get the admin key from Ceph cluster use this command:
 ```
-ceph --cluster ceph auth get-key client.admin
+$ ceph --cluster ceph auth get-key client.admin
 ```
 Now create Kubernetes secret with this key
 ```
- kubectl create secret generic ceph-secret \
+$ kubectl create secret generic ceph-secret \
     --type="kubernetes.io/rbd" \
     --from-literal=key='COPY-YOUR-ADMIN-KEY-HERE' \
     --namespace=kube-system
@@ -212,10 +214,10 @@ spec:
   storageClassName: storage-rbd
 
   ```
-  and run 
-  ```
-  $ kubectl create -f pvc.yml
-  ```
+ and run 
+ ```
+ $ kubectl create -f pvc.yml
+ ```
   
   ![pvc](images/pvc.png)
   
